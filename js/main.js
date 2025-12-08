@@ -11,6 +11,7 @@ const resultMsg=document.getElementById('resultMsg');
 
 menuBtn.addEventListener('click',()=>sideNav.classList.add('show'));
 closeBtn.addEventListener('click',()=>sideNav.classList.remove('show'));
+
 navLinks.forEach(link=>{
     link.addEventListener('click',e=>{
         e.preventDefault();
@@ -30,16 +31,13 @@ form.addEventListener('submit',async(e)=>{
     const ip=document.getElementById('subIP').value.trim();
     const domain=document.getElementById('subDomain').value;
     if(!sub||!ip||!domain){
-        resultMsg.textContent='All fields required';
-        return;
+        resultMsg.textContent='All fields required';return;
     }
     if(!/^[a-zA-Z0-9-]+$/.test(sub)){
-        resultMsg.textContent='Invalid subdomain format';
-        return;
+        resultMsg.textContent='Invalid subdomain format';return;
     }
     if(!isValidIP(ip)){
-        resultMsg.textContent='Invalid IP address';
-        return;
+        resultMsg.textContent='Invalid IP address';return;
     }
     try{
         const res=await fetch(`${API_BASE}/create-subdomain`,{
@@ -61,9 +59,30 @@ form.addEventListener('submit',async(e)=>{
         resultMsg.textContent='Network error';
     }
 });
-
 function isValidIP(ip){
     const p=ip.split('.');
     if(p.length!==4)return false;
     return p.every(x=>{const n=parseInt(x,10);return!isNaN(n)&&n>=0&&n<=255});
 }
+
+const tabBtns=document.querySelectorAll('.tabBtn');
+const tabContents=document.querySelectorAll('.tabContent');
+tabBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const id=btn.dataset.tab;
+        tabBtns.forEach(b=>b.classList.remove('active'));
+        tabContents.forEach(c=>c.classList.remove('show'));
+        btn.classList.add('active');
+        document.getElementById(id).classList.add('show');
+    });
+});
+
+document.querySelectorAll('.copyBtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const text=document.getElementById(btn.dataset.copy).innerText;
+        navigator.clipboard.writeText(text).then(()=>{
+            btn.textContent='Copied!';
+            setTimeout(()=>btn.textContent='Copy',1200);
+        });
+    });
+});
