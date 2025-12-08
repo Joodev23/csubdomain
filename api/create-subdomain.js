@@ -47,10 +47,10 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "GET") return res.status(405).json({ error: "Only GET allowed" });
 
-  const { subdomain, ip, domain, key } = req.query;
+  const { subdomain, ip, domain, apikey } = req.query;
 
-  if (!subdomain || !ip || !domain || !key) return res.status(400).json({ error: "Missing parameters" });
-  if (key !== FIXED_API_KEY) return res.status(401).json({ error: "Invalid key" });
+  if (!subdomain || !ip || !domain || !apikey) return res.status(400).json({ error: "Missing parameters" });
+  if (apikey !== FIXED_API_KEY) return res.status(401).json({ error: "Invalid apikey" });
   if (!/^[a-zA-Z0-9-]+$/.test(subdomain)) return res.status(400).json({ error: "Invalid subdomain" });
   if (!isValidIP(ip)) return res.status(400).json({ error: "Invalid IP" });
 
