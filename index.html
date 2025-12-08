@@ -6,17 +6,14 @@
     <title>CSubdomain – Simple Creator</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <header class="topbar">
         <div class="tbLeft">
             <button class="hamburger" id="menuBtn" aria-label="Open menu">
- 
                 <svg class="ico" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
             </button>
             <a class="logo" href="#">
-                 
                 <svg class="logoIco" viewBox="0 0 28 28"><path d="M8 4h12a4 4 0 014 4v12a4 4 0 01-4 4H8a4 4 0 01-4-4V8a4 4 0 014-4zM8 10l4 4-4 4m8-8l4 4-4 4"/></svg>
                 <span>CSubdomain</span>
             </a>
@@ -47,7 +44,7 @@
                         <label>Subdomain</label>
                         <div class="inpW">
                             <svg class="inpIco" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 14h2v2h-2zm0-10h2v8h-2z"/></svg>
-                            <input type="text" id="subName" placeholder="Panelku" required>
+                            <input type="text" id="subName" placeholder="panelku" required>
                         </div>
                         <span class="hint">Letters, numbers & hyphens only</span>
                     </div>
@@ -94,49 +91,39 @@
 
                 <div class="tabs">
                     <button class="tabBtn active" data-tab="endpoint">Endpoint</button>
-                    <button class="tabBtn" data-tab="curl">cURL</button>
+                    <button class="tabBtn" data-tab="example">Example URL</button>
                     <button class="tabBtn" data-tab="response">Response</button>
                 </div>
 
                 <!-- endpoint -->
                 <div class="tabContent show" id="endpoint">
                     <div class="docItem">
-                        <h3>POST <span class="badge">/api/create-subdomain</span></h3>
+                        <h3>GET <span class="badge">/api/create-subdomain</span></h3>
                         <p>Creates a new subdomain pointing to the given IP.</p>
                     </div>
                     <div class="docItem">
-                        <h3>Headers</h3>
-                        <pre><code>Authorization: Bearer JooooModdssAlicia11112025
-Content-Type: application/json</code></pre>
-                    </div>
-                    <div class="docItem">
-                        <h3>Body (JSON)</h3>
-                        <pre><code>{
-  "subdomain": "panelku",
-  "ip": "192.168.1.1",
-  "domain": "vortexx.web.id"
-}</code></pre>
+                        <h3>Parameters</h3>
+                        <ul style="font-size: 0.8rem; color: var(--textSec); padding-left: 1rem;">
+                            <li><strong>subdomain</strong> – string (required)</li>
+                            <li><strong>ip</strong> – string (required)</li>
+                            <li><strong>domain</strong> – string (required)</li>
+                            <li><strong>apikey</strong> – string (required)</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="tabContent" id="curl">
+                <!-- example -->
+                <div class="tabContent" id="example">
                     <div class="docItem">
                         <div class="copyBar">
-                            <span>Example cURL</span>
-                            <button class="copyBtn" data-copy="curlEx">Copy</button>
+                            <span>Example URL</span>
+                            <button class="copyBtn" data-copy="urlEx">Copy</button>
                         </div>
-                        <pre id="curlEx"><code>curl -X POST https://yourdomain/api/create-subdomain \
-  -H "Authorization: Bearer JooooModdssAlicia11112025" \
-  -H "Content-Type: application/json" \
-  -d '{
-        "subdomain": "panelku",
-        "ip": "192.168.1.1",
-        "domain": "vortexx.web.id"
-      }'</code></pre>
+                        <pre id="urlEx"><code>https://yourdomain/api/create-subdomain?subdomain=panelku&ip=192.168.1.1&domain=vortexx.web.id&apikey=JooooModdssAlicia11112025</code></pre>
                     </div>
                 </div>
 
- 
+                <!-- response -->
                 <div class="tabContent" id="response">
                     <div class="docItem">
                         <h3>200 OK</h3>
