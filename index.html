@@ -3,90 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSubdomain - Simple Creator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>CSubdomain – Simple Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <header class="topbar">
-        <button class="hamburger" id="menuBtn" aria-label="Open menu">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
-        <h1 class="logo">CSubdomain</h1>
+        <div class="tbLeft">
+            <button class="hamburger" id="menuBtn" aria-label="Open menu">
+ 
+                <svg class="ico" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+            <a class="logo" href="#">
+                 
+                <svg class="logoIco" viewBox="0 0 28 28"><path d="M8 4h12a4 4 0 014 4v12a4 4 0 01-4 4H8a4 4 0 01-4-4V8a4 4 0 014-4zM8 10l4 4-4 4m8-8l4 4-4 4"/></svg>
+                <span>CSubdomain</span>
+            </a>
+        </div>
+
+        <nav class="topNav">
+            <a href="#create" class="navLink active">Create</a>
+            <a href="#docs" class="navLink">Documentation</a>
+        </nav>
+
+        <img src="https://github.com/Joodev65.png" alt="Avatar" class="avatar">
     </header>
 
-    <nav class="sideNav" id="sideNav">
+    <aside class="sideNav" id="sideNav">
         <button class="closeBtn" id="closeBtn">&times;</button>
         <ul>
             <li><a href="#create" class="navLink active">Create</a></li>
             <li><a href="#docs" class="navLink">Documentation</a></li>
         </ul>
-    </nav>
+    </aside>
 
     <main class="wrapper">
         <section id="create" class="panel active">
-            <h2>Create Subdomain</h2>
-            <form id="subForm">
-                <div class="field">
-                    <label>Subdomain</label>
-                    <input type="text" id="subName" placeholder="Panelku" required>
-                    <span class="hint">Letters, numbers & hyphens only</span>
-                </div>
-                <div class="field">
-                    <label>Target IP</label>
-                    <input type="text" id="subIP" placeholder="192.168.1.1" required>
-                </div>
-                <div class="field">
-                    <label>Domain</label>
-                    <select id="subDomain" required>
-                        <option value="">Choose...</option>
-                        <option>vortexx.web.id</option>
-                        <option>kelazzz.biz.id</option>
-                        <option>joomods.web.id</option>
-                        <option>liinode.biz.id</option>
-                        <option>blademoon.my.id</option>
-                        <option>rezeemd.my.id</option>
-                        <option>pteroodctly.my.id</option>
-                        <option>kaylapanel.my.id</option>
-                        <option>digitalzocean.biz.id</option>
-                    </select>
-                </div>
-                <button type="submit" class="submitBtn">
-                    <span>Create</span>
-                    <svg class="btnIcon" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-                </button>
-            </form>
-            <div id="resultMsg"></div>
+            <div class="card">
+                <h2>Create Subdomain</h2>
+                <form id="subForm" autocomplete="off">
+                    <div class="field">
+                        <label>Subdomain</label>
+                        <div class="inpW">
+                            <svg class="inpIco" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 14h2v2h-2zm0-10h2v8h-2z"/></svg>
+                            <input type="text" id="subName" placeholder="Panelku" required>
+                        </div>
+                        <span class="hint">Letters, numbers & hyphens only</span>
+                    </div>
+
+                    <div class="field">
+                        <label>Target IP</label>
+                        <div class="inpW">
+                            <svg class="inpIco" viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                            <input type="text" id="subIP" placeholder="192.168.1.1" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Domain</label>
+                        <div class="inpW">
+                            <svg class="inpIco" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2zm0-4H9V7h2zm4 4h-2v-2h2zm0-4h-2V7h2z"/></svg>
+                            <select id="subDomain" required>
+                                <option value="">Choose…</option>
+                                <option>vortexx.web.id</option>
+                                <option>kelazzz.biz.id</option>
+                                <option>joomods.web.id</option>
+                                <option>liinode.biz.id</option>
+                                <option>blademoon.my.id</option>
+                                <option>rezeemd.my.id</option>
+                                <option>pteroodctly.my.id</option>
+                                <option>kaylapanel.my.id</option>
+                                <option>digitalzocean.biz.id</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submitBtn">
+                        <svg class="btnIco" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <span>Create</span>
+                    </button>
+                </form>
+                <div id="resultMsg"></div>
+            </div>
         </section>
 
         <section id="docs" class="panel">
-            <h2>API Documentation</h2>
-            <div class="docBox">
-                <h3>Endpoint</h3>
-                <code>POST /api/create-subdomain</code>
-            </div>
-            <div class="docBox">
-                <h3>Headers</h3>
-                <code>Authorization: Bearer JooooModdssAlicia11112025</code>
-            </div>
-            <div class="docBox">
-                <h3>Body (JSON)</h3>
-                <pre>{
+            <div class="card">
+                <h2>API Documentation</h2>
+
+                <div class="tabs">
+                    <button class="tabBtn active" data-tab="endpoint">Endpoint</button>
+                    <button class="tabBtn" data-tab="curl">cURL</button>
+                    <button class="tabBtn" data-tab="response">Response</button>
+                </div>
+
+                <!-- endpoint -->
+                <div class="tabContent show" id="endpoint">
+                    <div class="docItem">
+                        <h3>POST <span class="badge">/api/create-subdomain</span></h3>
+                        <p>Creates a new subdomain pointing to the given IP.</p>
+                    </div>
+                    <div class="docItem">
+                        <h3>Headers</h3>
+                        <pre><code>Authorization: Bearer JooooModdssAlicia11112025
+Content-Type: application/json</code></pre>
+                    </div>
+                    <div class="docItem">
+                        <h3>Body (JSON)</h3>
+                        <pre><code>{
   "subdomain": "panelku",
   "ip": "192.168.1.1",
   "domain": "vortexx.web.id"
-}</pre>
-            </div>
-            <div class="docBox">
-                <h3>Success Response</h3>
-                <pre>{
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tabContent" id="curl">
+                    <div class="docItem">
+                        <div class="copyBar">
+                            <span>Example cURL</span>
+                            <button class="copyBtn" data-copy="curlEx">Copy</button>
+                        </div>
+                        <pre id="curlEx"><code>curl -X POST https://yourdomain/api/create-subdomain \
+  -H "Authorization: Bearer JooooModdssAlicia11112025" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "subdomain": "panelku",
+        "ip": "192.168.1.1",
+        "domain": "vortexx.web.id"
+      }'</code></pre>
+                    </div>
+                </div>
+
+ 
+                <div class="tabContent" id="response">
+                    <div class="docItem">
+                        <h3>200 OK</h3>
+                        <pre><code>{
   "success": true,
   "data": {
     "subdomain": "panelku.vortexx.web.id",
     "ip": "192.168.1.1"
   }
-}</pre>
+}</code></pre>
+                    </div>
+                    <div class="docItem">
+                        <h3>4xx / 5xx</h3>
+                        <pre><code>{
+  "success": false,
+  "error": "Subdomain already exists"
+}</code></pre>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
