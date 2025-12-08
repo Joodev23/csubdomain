@@ -41,55 +41,47 @@ const FIXED_API_KEY = "JooooModdssAlicia11112025";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "GET") return res.status(405).json({ error: "Only GET allowed" });
 
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  const { subdomain, ip, domain, key } = req.query;
 
-  try {
-    const { subdomain, ip, domain } = req.body;
-    const auth = req.headers.authorization;
+  if (!subdomain || !ip || !domain || !key) return res.status(400).json({ error: "Missing parameters" });
+  if (key !== FIXED_API_KEY) return res.status(401).json({ error: "Invalid key" });
+  if (!/^[a-zA-Z0-9-]+$/.test(subdomain)) return res.status(400).json({ error: "Invalid subdomain" });
+  if (!isValidIP(ip)) return res.status(400).json({ error: "Invalid IP" });
 
-    if (!auth || !auth.startsWith("Bearer ")) return res.status(401).json({ error: "Missing auth" });
-    if (auth.substring(7) !== FIXED_API_KEY) return res.status(401).json({ error: "Invalid API key" });
+  const cfg = SUBDOMAIN_CONFIG[domain];
+  if (!cfg || !cfg.zone) return res.status(400).json({ error: "Domain not configured" });
 
-    if (!subdomain || !ip || !domain) return res.status(400).json({ error: "Missing fields" });
-    if (!/^[a-zA-Z0-9-]+$/.test(subdomain)) return res.status(400).json({ error: "Invalid subdomain" });
-    if (!isValidIP(ip)) return res.status(400).json({ error: "Invalid IP" });
+  const cfRes = await fetch(`https://api.cloudflare.com/client/v4/zones/${cfg.zone}/dns_records`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${cfg.token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      type: "A",
+      name: `${subdomain}.${domain}`,
+      content: ip,
+      ttl: 300,
+      proxied: false
+    })
+  });
 
-    const cfg = SUBDOMAIN_CONFIG[domain];
-    if (!cfg || !cfg.zone) return res.status(400).json({ error: "Domain not configured" });
+  const cfData = await cfRes.json();
+  if (!cfData.success) return res.status(500).json({ error: "Cloudflare error" });
 
-    const cfRes = await fetch(`https://api.cloudflare.com/client/v4/zones/${cfg.zone}/dns_records`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${cfg.token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        type: "A",
-        name: `${subdomain}.${domain}`,
-        content: ip,
-        ttl: 300,
-        proxied: false
-      })
-    });
-
-    const cfData = await cfRes.json();
-    if (!cfData.success) return res.status(500).json({ error: "Cloudflare error" });
-
-    return res.status(200).json({
-      success: true,
-      data: {
-        subdomain: `${subdomain}.${domain}`,
-        ip
-      }
-    });
-  } catch (e) {
-    return res.status(500).json({ error: "Server error" });
-  }
+  return res.status(200).json({
+    success: true,
+    data: {
+      subdomain: `${subdomain}.${domain}`,
+      ip
+    }
+  });
 }
 
 function isValidIP(ip) {
