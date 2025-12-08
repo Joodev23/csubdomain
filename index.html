@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSubdomain - Simple Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="topbar">
+        <button class="hamburger" id="menuBtn" aria-label="Open menu">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <h1 class="logo">CSubdomain</h1>
+    </header>
+
+    <nav class="sideNav" id="sideNav">
+        <button class="closeBtn" id="closeBtn">&times;</button>
+        <ul>
+            <li><a href="#create" class="navLink active">Create</a></li>
+            <li><a href="#docs" class="navLink">Documentation</a></li>
+        </ul>
+    </nav>
+
+    <main class="wrapper">
+        <section id="create" class="panel active">
+            <h2>Create Subdomain</h2>
+            <form id="subForm">
+                <div class="field">
+                    <label>Subdomain</label>
+                    <input type="text" id="subName" placeholder="myapp" required>
+                    <span class="hint">Letters, numbers & hyphens only</span>
+                </div>
+                <div class="field">
+                    <label>Target IP</label>
+                    <input type="text" id="subIP" placeholder="192.168.1.1" required>
+                </div>
+                <div class="field">
+                    <label>Domain</label>
+                    <select id="subDomain" required>
+                        <option value="">Choose...</option>
+                        <option>vortexx.web.id</option>
+                        <option>kelazzz.biz.id</option>
+                        <option>joomods.web.id</option>
+                        <option>liinode.biz.id</option>
+                        <option>blademoon.my.id</option>
+                        <option>rezeemd.my.id</option>
+                        <option>pteroodctly.my.id</option>
+                        <option>kaylapanel.my.id</option>
+                        <option>digitalzocean.biz.id</option>
+                    </select>
+                </div>
+                <button type="submit" class="submitBtn">
+                    <span>Create</span>
+                    <svg class="btnIcon" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                </button>
+            </form>
+            <div id="resultMsg"></div>
+        </section>
+
+        <section id="docs" class="panel">
+            <h2>API Documentation</h2>
+            <div class="docBox">
+                <h3>Endpoint</h3>
+                <code>POST /api/create-subdomain</code>
+            </div>
+            <div class="docBox">
+                <h3>Headers</h3>
+                <code>Authorization: Bearer JooooModdssAlicia11112025</code>
+            </div>
+            <div class="docBox">
+                <h3>Body (JSON)</h3>
+                <pre>{
+  "subdomain": "myapp",
+  "ip": "192.168.1.1",
+  "domain": "vortexx.web.id"
+}</pre>
+            </div>
+            <div class="docBox">
+                <h3>Success Response</h3>
+                <pre>{
+  "success": true,
+  "data": {
+    "subdomain": "myapp.vortexx.web.id",
+    "ip": "192.168.1.1"
+  }
+}</pre>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
