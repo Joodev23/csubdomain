@@ -37,7 +37,7 @@ const SUBDOMAIN_CONFIG = {
   }
 };
 
-const FIXED_API_KEY = "JooooModdssAlicia11112025";
+const FIXED_API_KEY = "JooModdss2026";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
