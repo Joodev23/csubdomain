@@ -68,7 +68,7 @@ export default async function handler(req, res) {
       name: `${subdomain}.${domain}`,
       content: ip,
       ttl: 300,
-      proxied: false
+      proxied: true
     })
   });
 
